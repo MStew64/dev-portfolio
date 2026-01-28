@@ -1,6 +1,7 @@
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { AlertCircle, CheckCircle, Mail, MapPin, Phone, Send } from "lucide-react";
 import { Button } from "@/components/Button";
-import { use, useState } from "react";
+import { useState } from "react";
+import  emailjs  from "@emailjs/browser";
 
 const contactInfo = [
   {
@@ -23,6 +24,8 @@ const contactInfo = [
   }
 ]
 
+
+
 export const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -30,9 +33,47 @@ export const Contact = () => {
     message: ""
   })
 
+  const[isLoading, setIsLoading] = useState (false);
+  const [submitStatus, setSubmitStatus] = useState ({
+    type: null,
+    message: "",
+  });
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-  }
+    e.preventDefault()
+
+    setIsLoading(true);
+    setSubmitStatus({ type: null, message: "" });
+    try{
+      const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (!serviceID || !templateID || !publicKey) {
+        throw new Error("EmailJS environment variables are not set properly.");
+      }
+
+      await emailjs.send(
+        serviceID,
+        templateID,
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+        publicKey
+      );
+
+      setSubmitStatus({ type: "success", message: "Message sent successfully!" });
+      setFormData({ name: "", email: "", message: "" });
+
+    }catch (error) {
+      console.error("Error sending message:", error)
+      setSubmitStatus({ type: "error", message: "Failed to send message. Please try again later." });
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
   <section id="contact" className="py-32 relative overflow-hidden">
     <div 
@@ -54,7 +95,7 @@ export const Contact = () => {
       {/* Contact Info */}
       <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
         <div className="glass p-8 rounded-3xl border border-primary/30 animate-fade-in animation-delay-300">
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="name" 
               className="block text-sm font-medium mb-2"> 
@@ -107,10 +148,47 @@ export const Contact = () => {
                 onChange= { (e) => setFormData({...formData, message: e.target.value}) }
               />
             </div>
-            <Button type="submit" className="w-full" size="lg">Send Message <Send/></Button>
+            <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
+              { isLoading ? "Sending..." : (<>
+                Send Message <Send className="w-4 h-4" />
+              </>)}
+              </Button>
+              { submitStatus.type && (
+                <p className={`mt-4 text-center font-medium ${ submitStatus.type === "success" ? "text-green-500" : "text-red-500"}`}>
+                  {submitStatus.type === "success" ? <CheckCircle className="w-5 h-5 flex-shrink-0" /> : <AlertCircle className="w-5 h-5 flex-shrink-0" />} {submitStatus.message}
+                </p>
+              )}
           </form>
         </div>
+        {/* Contact Details */}
+          <div className="space-y-6 animate-fade-in animation-delay-400">
+            <div className="glass rounded-3xl p-8">
+              <h3 className="text-xl font-semibold mb-6">
+                Contact Information
+              </h3>
+              <div className="space-y-4">
+                {contactInfo.map((item, i) => (
+                  <a
+                    key={i}
+                    href={item.href}
+                    className="flex items-center gap-4 p-4 rounded-xl hover:bg-surface transition-colors group"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <item.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground">
+                        {item.label}
+                      </div>
+                      <div className="font-medium">{item.value}</div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
       </div>
     </div>
-  </section>);
+  </section>
+  );
 };
