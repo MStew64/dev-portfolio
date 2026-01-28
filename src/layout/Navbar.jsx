@@ -3,9 +3,8 @@ import { Menu, X } from "lucide-react";
 import React, { useEffect } from "react";
 
 const navLinks = [ 
-    { text: "About", href: "/about" },
-    { text: "Projects", href: "/projects" },
-    { text: "Experience", href: "/experience" }
+    { label: "About", href: "#about" },
+    { label: "Experience", href: "#experience" }
 ];
 
 export const Navbar = () => {
@@ -41,8 +40,10 @@ export const Navbar = () => {
         <div className="hidden md:flex items-center gap-1">
             <div className="glass rounded-full px-2 py-1 flex items-center gap-1">
                 {navLinks.map((link, index) => (
-                    <a key={index} href={link.href} className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-surface">
-                        {link.text}
+                    <a key={index}
+                    href={link.href}
+                    className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-surface">
+                        {link.label}
                     </a>
                 ))}
             </div>
@@ -64,12 +65,15 @@ export const Navbar = () => {
         <div className="md:hidden glass-strong animate-fade-in">
           <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
             {navLinks.map((link, index) => (
-                    <a key={index} href={link.href} className="text-lg text-muted-foreground hover:text-foreground py-2">
-                        {link.text}
+                    <a key={index}
+                     href={link.href}
+                     onClick={() => setIsMobileMenuOpen(false)}
+                     className="text-lg text-muted-foreground hover:text-foreground py-2">
+                        {link.label}
                     </a>
                 ))}
 
-            <Button>Contact Me</Button>
+            <Button onClick={() => setIsMobileMenuOpen(false)}>Contact Me</Button>
           </div>
         </div>
     )}
