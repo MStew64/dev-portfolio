@@ -1,16 +1,70 @@
-# React + Vite
+# Dev Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal portfolio website to showcase my skills as a developer and highlight projects I've worked on.
 
-Currently, two official plugins are available:
+🔗 **Live Site:** [michael-stewart-portfolio.vercel.app](https://michael-stewart-portfolio.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Layer | Technology |
+|-------|------------|
+| Framework | React |
+| Build Tool | Vite |
+| Language | JavaScript |
+| Styling | CSS |
+| Deployment | Vercel |
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18+)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+### Run Locally
+
+```bash
+git clone https://github.com/MStew64/dev-portfolio.git
+cd dev-portfolio
+npm install
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+The output will be in the `dist/` folder, ready to be deployed.
+
+---
+
+## Project Structure
+
+```
+dev-portfolio/
+├── public/          # Static assets
+├── src/             # React components and styles
+├── index.html       # HTML entry point
+├── vite.config.js   # Vite configuration
+└── package.json     # Dependencies and scripts
+```
+
+---
+
+## Deployment
+
+This project is deployed via [Vercel](https://vercel.com/). Any push to the `master` branch will trigger an automatic deployment.
+
+---
+
+## License
+
+This project is open source. See [LICENSE](LICENSE) for details.
