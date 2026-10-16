@@ -3,17 +3,29 @@ import { ArrowRight,ChevronDown, Github, Linkedin, Download } from "lucide-react
 import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
 
 const skills = [
-  "React",
+  "React.js",
   "TypeScript",
+  "JavaScript",
   "Python",
   "Java",
-  "AWS",
-  "SQL",
+  "C++",
   "HTML",
   "CSS",
   "Node.js",
+  "Spring Boot",
+  "Microservices",
+  "REST APIs",
+  "SQL",
+  "Angular",
+  "Tailwind CSS",
+  "Selenium",
+  "Cypress",
+  "AWS",
+  "Docker",
+  "Kubernetes",
   "Git",
-  "Cypress"
+  "AI Agent Development",
+  "LLM Integration"
 ];
 
 export const Hero = () => {
@@ -125,7 +137,7 @@ export const Hero = () => {
               <div className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3 animate-float animattion-delay-500">
                 <div className="flex items-center gap-3">
                   <div className="text-center">
-                    <div className="text-xl font-bold text-primary">2+</div>
+                    <div className="text-xl font-bold text-primary">3+</div>
                     <div className="text-xs text-sm text-muted-foreground">Years Experience</div>
                   </div>
                 </div>

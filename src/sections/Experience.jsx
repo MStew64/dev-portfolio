@@ -1,5 +1,12 @@
 const experience = [
   {
+    company: "Birlasoft",
+    role: "Software Engineer",
+    duration: "Jul 2026 - Present",
+    description: "Support and maintain Raytheon's enterprise Product Lifecycle Management (PLM) platform, translating customer workflows into technical fixes and enhancements. Build Selenium automated tests to expand coverage and reduce manual QA, and partner with customers and engineering teams to troubleshoot production issues.",
+    technologies: ["Selenium", "Windchill", "Java", "Python", "Automation"]
+  },
+  {
     company: "Oracle",
     role: "Software Engineer",
     duration: "2023 - 2025",
